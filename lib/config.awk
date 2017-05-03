@@ -34,5 +34,9 @@ action == "config" && section == "parse_convert" && (NF > 1) {
 }
 
 action == "config" && section == "ignore" {
-  ignore[ignore_count++] = $0
+  if (substr($0, length($0)) == "/") {
+    ignore_dir[ignore_dir_count++] = substr($0, 1, length($0) - 1)
+  } else {
+    ignore[ignore_count++] = $0
+  }
 }

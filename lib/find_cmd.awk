@@ -23,8 +23,15 @@ END {
       opts[opt_count++] = exts[i]
     }
   }
+  if ( length(ignore_dir) ) {
+    prunepart = "-type d \\( -name \"" ignore_dir[0] "\""
+    for (i = 1; i < length(ignore_dir); i++) {
+      prunepart = prunepart " -o -name \"" ignore_dir[i] "\""
+    }
+    prunepart = prunepart " \\) -prune -o"
+  }
   for (i = 0; i < length(opts); i++) {
     optpart = optpart " " opts[i]
   }
-  printf "find \"%s\" -type f \\( %s \\) -exec zod-%s \"%s\" \"%s\" \"%s\" {} \\;", proj, optpart, phase, zod_lib, proj, target
+  printf "find \"%s\" %s -type f \\( %s \\) -exec zod-%s \"%s\" \"%s\" \"%s\" {} \\;", proj, prunepart, optpart, phase, zod_lib, proj, target
 }

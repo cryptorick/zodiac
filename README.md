@@ -173,6 +173,7 @@ For more control over the parsing and conversion process, a `.zod/config` file c
 
     [ignore]
     Makefile
+    .hide/
 
 Here we're only parsing (not converting to a different format) files matching `*.htm` and `*.html`.
 
@@ -180,7 +181,7 @@ Files matching `*.md` are going to be parsed and converted using the `smu` markd
 
 Files matching `*.txt` are going to be parsed and converted using `asciidoc`.
 
-Files matching `Makefile` will be ignored and not copied.
+Files matching `Makefile` and directories matching `.hide` will be ignored and not copied.
 
 Conversion programs must accept a UNIX-style pipe and send converted data to stdout.
 

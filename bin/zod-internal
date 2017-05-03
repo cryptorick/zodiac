@@ -11,7 +11,8 @@ helpers.awk
 *.partial
 *.layout
 *.meta
-config
+.zod/
+.git/
 !
 }
 
